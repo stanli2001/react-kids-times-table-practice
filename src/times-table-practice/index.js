@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Modal from "./Modal";
 import { reducer } from "./reducer";
+import { getQuestion } from "./random-question";
 
 const defaultState = {
   isModalOpen: true,
@@ -8,29 +9,12 @@ const defaultState = {
   userAnswer: [],
 };
 
-function randomIntFromInterval(min, max) {
-  // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 const Index = () => {
   const [userInput, setUserInput] = useState("");
   const [newquestion, setNewQuestion] = useState([]);
   // const [userAnswer, setUserAnswer] = useState("");
   const [state, dispatch] = useReducer(reducer, defaultState);
-  const getQuestion = () => {
-    let rndInt_1 = randomIntFromInterval(1, 10);
-    let rndInt_2 = randomIntFromInterval(1, 10);
-    let answer = rndInt_1 * rndInt_2;
-    let quest = rndInt_1.toString() + " x " + rndInt_2.toString() + " = ";
-    const newItem = {
-      id: new Date().getTime().toString(),
-      q: quest,
-      a: answer,
-    };
-    console.log(newItem);
-    setNewQuestion(newItem);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userInput) {
@@ -50,19 +34,17 @@ const Index = () => {
     dispatch({ type: "CLOSE_MODAL" });
   };
   useEffect(() => {
-    console.log("useEffect");
-    // setUserAnswer("");
-    getQuestion();
-     setTimeout(() => {
-       closeModal();
-     }, 2500);
+    // console.log("useEffect");
+    const newItem = getQuestion();
+    setNewQuestion(newItem);
+    setTimeout(() => {
+      closeModal();
+    }, 2500);
   }, [state.userAnswer]);
 
   return (
     <>
-      {state.isModalOpen && (
-        <Modal modalContent={state.modalContent} />
-      )}
+      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
       <form onSubmit={handleSubmit} className="form">
         <div>
           <h3>

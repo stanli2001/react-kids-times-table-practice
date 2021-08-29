@@ -2,7 +2,7 @@
 
 export const reducer = (state, action) => {
   if (action.type === "NEW_ANSWER") {
-    console.log("NEW_ANSWER");
+    // console.log("NEW_ANSWER");
     let user_answer = parseInt(action.payload["userInput"]);
     let correct_answer = action.payload["newquestion"].a;   
      const rec_for_display =
