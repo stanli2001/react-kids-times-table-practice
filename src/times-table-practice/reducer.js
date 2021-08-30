@@ -1,5 +1,19 @@
 // reducer function
 
+function compare(a, b) {
+  // Use parseInt() to convert String to Int
+  const idA = parseInt(a.id);
+  const idB = parseInt(b.id);
+
+  let comparison = 0;
+  if (idA > idB) {
+    comparison = 1;
+  } else if (idA < idB) {
+    comparison = -1;
+  }
+  return comparison * -1;
+}
+
 export const reducer = (state, action) => {
   if (action.type === "NEW_ANSWER") {
     // console.log("NEW_ANSWER");
@@ -14,11 +28,12 @@ export const reducer = (state, action) => {
     }
     action.payload.display_rec = rec_for_display;
     const newUserAnswer = [...state.userAnswer, action.payload];
+    const sortednewUserAnswer = newUserAnswer.sort(compare);
     return {
       ...state,
       isModalOpen: true,
       modalContent: "Next",
-      userAnswer: newUserAnswer,
+      userAnswer: sortednewUserAnswer,
     };
   }
   if (action.type === "NO_VALUE") {

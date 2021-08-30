@@ -61,9 +61,9 @@ const Index = () => {
       {state.userAnswer.map((user_record) => {
         return (
           <div key={user_record.id} className="item">
-            <h4 style={{ color: user_record["result"] ? "green" : "red" }}>
+            <item style={{ color: user_record["result"] ? "green" : "red" }}>
               {user_record["display_rec"]}
-            </h4>
+            </item>
           </div>
         );
       })}
