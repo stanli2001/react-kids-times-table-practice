@@ -5,7 +5,7 @@ import { getQuestion } from "./random-question";
 
 const defaultState = {
   isModalOpen: true,
-  modalContent: "Dear Lucia, let's see if you can remember times table.",
+  modalContent: "Hi kid, let's see if you can remember times table.",
   userAnswer: [],
 };
 
