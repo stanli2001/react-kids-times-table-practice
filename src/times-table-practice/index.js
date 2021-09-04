@@ -2,11 +2,14 @@ import React, { useState, useEffect, useReducer } from "react";
 import Modal from "./Modal";
 import { reducer } from "./reducer";
 import { getQuestion } from "./random-question";
+import Popup from "./components/Popup";
 
 const defaultState = {
   isModalOpen: true,
   modalContent: "Hi kid, let's see if you can remember times table.",
   userAnswer: [],
+  buttonPopup: false,
+  numCorrectAnswer: 0,
 };
 
 const Index = () => {
@@ -33,12 +36,18 @@ const Index = () => {
   const closeModal = () => {
     dispatch({ type: "CLOSE_MODAL" });
   };
+  const closePopup = () => {
+    if (state.buttonPopup) {
+      dispatch({ type: "CLOSE_POPUP" });
+    }
+  };
   useEffect(() => {
     // console.log("useEffect");
     const newItem = getQuestion();
     setNewQuestion(newItem);
     setTimeout(() => {
       closeModal();
+      closePopup();
     }, 2500);
   }, [state.userAnswer]);
 
@@ -58,10 +67,14 @@ const Index = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <Popup trigger={state.buttonPopup} />
       {state.userAnswer.map((user_record) => {
         return (
           <div key={user_record.id} className="item">
-            <item style={{ color: user_record["result"] ? "green" : "red" }}>
+            <item
+              is="x3d"
+              style={{ color: user_record["result"] ? "green" : "red" }}
+            >
               {user_record["display_rec"]}
             </item>
           </div>
