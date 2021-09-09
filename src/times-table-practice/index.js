@@ -36,25 +36,20 @@ const Index = () => {
   const closeModal = () => {
     dispatch({ type: "CLOSE_MODAL" });
   };
-  // const closePopup = () => {
-  //   if (state.buttonPopup) {
-  //     dispatch({ type: "CLOSE_POPUP" });
-  //   }
-  // };
+  const closePopup = () => {
+    if (state.buttonPopup) {
+      dispatch({ type: "CLOSE_POPUP" });
+    }
+  };
   useEffect(() => {
     // console.log("useEffect");
     const newItem = getQuestion();
     setNewQuestion(newItem);
-     const closePopup = () => {
-       if (state.buttonPopup) {
-         dispatch({ type: "CLOSE_POPUP" });
-       }
-     };
     setTimeout(() => {
       closeModal();
       closePopup();
-    }, 2500);
-  }, [state.userAnswer]);
+    }, 5000);
+  }, [state.userAnswer, state.buttonPopup]);
 
   return (
     <>

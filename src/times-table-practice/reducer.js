@@ -31,7 +31,7 @@ export const reducer = (state, action) => {
       action.payload.result = false;
       current_numCorrectAnswer = state.numCorrectAnswer;
     }
-    if (current_numCorrectAnswer % 5 === 0 && current_numCorrectAnswer !== 0) {
+    if (current_numCorrectAnswer % 10 === 0 && current_numCorrectAnswer !== 0) {
       current_buttonPopup = true;
     } else {
       current_buttonPopup = false;
@@ -65,6 +65,8 @@ export const reducer = (state, action) => {
   if (action.type === "CLOSE_POPUP") {
     return {
       ...state,
+      modalContent: "Well done!",
+      userAnswer: [],
       buttonPopup: false,
       numCorrectAnswer: 0,
     };
